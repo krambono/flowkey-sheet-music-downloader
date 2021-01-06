@@ -145,30 +145,37 @@
 <section class="section is-size-5">
   <h1 class="title">Generate the sheet music</h1>
   <hr />
-  <div class="field">
-    <label class="label is-medium" for="title">Title</label>
-    <div class="control">
-      <input
-        id="title"
-        class="input is-medium"
-        type="text"
-        placeholder="Ode to joy"
-        bind:value={title}
-        disabled={!images.length} />
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <label class="label is-medium" for="title">Title</label>
+        <div class="control">
+          <input
+            id="title"
+            class="input is-medium"
+            type="text"
+            placeholder="Ode to joy"
+            bind:value={title}
+            disabled={!images.length} />
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label class="label is-medium" for="subtitle">Subtitle</label>
+        <div class="control">
+          <input
+            id="subtitle"
+            class="input is-medium"
+            type="text"
+            placeholder="Beethoven"
+            bind:value={subtitle}
+            disabled={!images.length} />
+        </div>
+      </div>
     </div>
   </div>
-  <div class="field">
-    <label class="label is-medium" for="subtitle">Subtitle</label>
-    <div class="control">
-      <input
-        id="subtitle"
-        class="input is-medium"
-        type="text"
-        placeholder="Beethoven"
-        bind:value={subtitle}
-        disabled={!images.length} />
-    </div>
-  </div>
+
   <div class="field mb-5">
     <label class="label is-medium" for="imagesPerRow">Number of images per row</label>
     <div class="select">
