@@ -9,17 +9,12 @@
 
   let urlFirstPart: string = '';
 
-  let flowkeyUrl: string = 'http://localhost:5000/images/sheet';
+  let flowkeyUrl: string = '';
   let isUrlValid: boolean = false;
 
   $: isUrlValid = testUrl(flowkeyUrl);
 
   function testUrl(url: string): boolean {
-    if (url === 'http://localhost:5000/images/sheet') {
-      urlFirstPart = 'http://localhost:5000/images/sheet';
-      return true;
-    }
-
     const urlRegex: RegExp = /(https:\/\/flowkeycdn.com\/sheets\/.*\/150\/)(\d+.png)/;
     const result: RegExpExecArray | null = urlRegex.exec(url);
 
