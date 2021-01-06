@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="column">
-      <div class="is-flex is-justify-content-center"><img class="image" src="/flowkey-screen.png" alt="" /></div>
+      <div class="is-flex is-justify-content-center"><img class="image" src="flowkey-screen.png" alt="" /></div>
     </div>
   </div>
 </section>
