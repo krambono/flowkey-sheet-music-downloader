@@ -14,8 +14,15 @@
 
   $: isUrlValid = testUrl(flowkeyUrl);
 
+  $: if (flowkeyUrl || true) {
+    downloadError = false;
+  }
+
+  let downloadError: boolean = false;
+  let downloadSuccess: boolean = false;
+
   function testUrl(url: string): boolean {
-    const urlRegex: RegExp = /(https:\/\/flowkeycdn.com\/sheets\/.*\/150\/)(\d+.png)/;
+    const urlRegex: RegExp = /^(https:\/\/flowkeycdn.com\/sheets\/.*\/150\/)(\d+.png)$/;
     const result: RegExpExecArray | null = urlRegex.exec(url);
 
     if (!result) {
@@ -26,18 +33,22 @@
   }
 
   let isLoading = false;
-  async function getImages() {
+  async function getImages(): Promise<void> {
     isLoading = true;
     images = await downloadImages(urlFirstPart);
+    if (images.length === 0) {
+      downloadError = true;
+    } else {
+      downloadSuccess = true;
+    }
     isLoading = false;
   }
-</script>
 
-<style>
-  .visibilty-hidden {
-    visibility: hidden;
+  function resetMessages(): void {
+    downloadError = false;
+    downloadSuccess = false;
   }
-</style>
+</script>
 
 <section class="section is-size-5">
   <h1 class="title">Get Flowkey URL</h1>
@@ -57,13 +68,20 @@
             type="text"
             placeholder="https://flowkeycdn.com/sheets/XXXXXXXX/150/5.png"
             bind:value={flowkeyUrl}
+            on:input={resetMessages}
             class:is-success={isUrlValid && flowkeyUrl !== ''}
-            class:is-danger={!isUrlValid && flowkeyUrl !== ''} />
+            class:is-danger={(!isUrlValid && flowkeyUrl !== '') || downloadError} />
         </div>
-        <p class="help is-danger is-size-6 mb-2" class:visibilty-hidden={isUrlValid || flowkeyUrl === ''}>
-          The URL is not valid
-        </p>
-        <button on:click={getImages} disabled={!isUrlValid} class="button is-primary" class:is-loading={isLoading}>
+        {#if !isUrlValid && flowkeyUrl !== ''}
+          <p class="help is-danger is-size-6 mb-2">The URL is not valid</p>
+        {/if}
+        {#if downloadError}
+          <p class="help is-danger is-size-6 mb-2">An error occurred</p>
+        {/if}
+        {#if downloadSuccess}
+          <p class="help is-success is-size-6 mb-2">Done.</p>
+        {/if}
+        <button on:click={getImages} disabled={!isUrlValid} class="button is-primary mt-3" class:is-loading={isLoading}>
           Load images
         </button>
       </div>
