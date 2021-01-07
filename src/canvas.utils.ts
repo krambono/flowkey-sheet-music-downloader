@@ -19,10 +19,6 @@ export async function downloadImages(url: string): Promise<HTMLImageElement[]> {
     cycle++;
   }
 
-  if (images.length == 0) {
-    throw new Error(`Not image found at url: "${url}"`);
-  }
-
   return images;
 }
 
