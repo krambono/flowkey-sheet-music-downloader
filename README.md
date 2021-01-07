@@ -6,4 +6,4 @@ The website was made with [svelte](https://svelte.dev/) and [bulma](https://bulm
 
 Tested on Chromium, Firefox, Edge and Brave.
 
-if you encounter a problem, please try another browser and if your problem persists, feel free to open an issue.
+If you encounter a problem, please try another browser and if your problem persists, feel free to open an issue.
