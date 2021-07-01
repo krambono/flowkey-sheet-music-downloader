@@ -2,7 +2,7 @@
 
 Download sheet music from Flowkey.
 
-Go to https://knona.github.io/flowkey-sheet-music-downloader/ and follow the instructions to download a Flowkey sheet music.
+Go to https://krambono.github.io/flowkey-sheet-music-downloader/ and follow the instructions to download a Flowkey sheet music.
 
 The website was made with [svelte](https://svelte.dev/) and [bulma](https://bulma.io/).
 
