@@ -22,7 +22,7 @@
   let downloadSuccess: boolean = false;
 
   function testUrl(url: string): boolean {
-    const urlRegex: RegExp = /^(https:\/\/flowkeycdn.com\/sheets\/.*\/150\/)(\d+.png)$/;
+    const urlRegex: RegExp = /^(https:\/\/flowkeycdn.com\/sheets\/.*\/\d+\/)(\d+.png)$/;
     const result: RegExpExecArray | null = urlRegex.exec(url);
 
     if (!result) {
@@ -70,7 +70,8 @@
             bind:value={flowkeyUrl}
             on:input={resetMessages}
             class:is-success={isUrlValid && flowkeyUrl !== ''}
-            class:is-danger={(!isUrlValid && flowkeyUrl !== '') || downloadError} />
+            class:is-danger={(!isUrlValid && flowkeyUrl !== '') || downloadError}
+          />
         </div>
         {#if !isUrlValid && flowkeyUrl !== ''}
           <p class="help is-danger is-size-6 mb-2">The URL is not valid</p>

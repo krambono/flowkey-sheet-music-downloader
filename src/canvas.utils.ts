@@ -40,8 +40,8 @@ export function loadImage(src): Promise<HTMLImageElement> {
       reject(new Error('Failed to load the image "' + src + '"'));
     };
 
-    image.src = src;
+    image.crossOrigin = 'Anonymous';
 
-    image.crossOrigin = 'anonymous';
+    image.src = src;
   });
 }

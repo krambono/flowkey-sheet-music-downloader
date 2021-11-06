@@ -25,6 +25,11 @@
     drawText(title, subtitle);
   }
 
+  $: {
+    images;
+    generate();
+  }
+
   onMount(() => {
     canvasContainer = document.getElementById('canvas-container') as HTMLDivElement;
     canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -76,6 +81,8 @@
     }
 
     ctx.clearRect(0, 0, width, headerHeight);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, width, headerHeight);
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'black';
@@ -130,18 +137,6 @@
   }
 </script>
 
-<style>
-  #canvas-container {
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: content-box;
-  }
-
-  .display-none {
-    display: none !important;
-  }
-</style>
-
 <section class="section is-size-5">
   <h1 class="title">Generate the sheet music</h1>
   <hr />
@@ -156,7 +151,8 @@
             type="text"
             placeholder="Ode to joy"
             bind:value={title}
-            disabled={!images.length} />
+            disabled={!images.length}
+          />
         </div>
       </div>
     </div>
@@ -170,7 +166,8 @@
             type="text"
             placeholder="Beethoven"
             bind:value={subtitle}
-            disabled={!images.length} />
+            disabled={!images.length}
+          />
         </div>
       </div>
     </div>
@@ -179,11 +176,8 @@
   <div class="field mb-5">
     <label class="label is-medium" for="imagesPerRow">Number of images per row</label>
     <div class="select">
-      <select
-        id="imagesPerRow"
-        disabled={!images.length}
-        value={imagesPerRow.toString()}
-        on:change={imagesPerRowChange}>
+      <!-- svelte-ignore a11y-no-onchange -->
+      <select id="imagesPerRow" disabled={!images.length} value={imagesPerRow} on:change={imagesPerRowChange}>
         {#each selectOptions as option}
           <option>{option}</option>
         {/each}
@@ -191,7 +185,6 @@
     </div>
   </div>
   <div class="is-flex">
-    <button on:click={generate} class="button is-primary" disabled={!images.length}>Generate</button>
     <button on:click={downloadAsPng} class="button is-primary ml-2" disabled={!isCanvasReady}>Download as PNG</button>
   </div>
 
@@ -199,3 +192,15 @@
     <div id="canvas-container" class="box"><canvas id="canvas" /></div>
   </div>
 </section>
+
+<style>
+  #canvas-container {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: content-box;
+  }
+
+  .display-none {
+    display: none !important;
+  }
+</style>
